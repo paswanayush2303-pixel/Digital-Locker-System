@@ -311,7 +311,7 @@ def remove_item(data, user):
     category_to_remove = None
     while True:
         try:
-            cat_choice = input("Enter the number of the Category to remove an item from: ").strip()
+            cat_choice = input("Choose an option: ").strip()
             if not cat_choice: continue
             
             cat_choice = int(cat_choice) - 1
@@ -407,3 +407,4 @@ def DigitalLockerSystem():
 
 
 DigitalLockerSystem()
+
