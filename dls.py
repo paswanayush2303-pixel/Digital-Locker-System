@@ -8,7 +8,7 @@ DATA_FILE = "locker_data.json"
 XOR_KEY = "SafestLockerDataKey1234567890" 
 
 def xor_cipher(data,key):
-    """Encrypts or decrypts a string using XOR cipher."""
+    """Encrypts  string using XOR cipher."""
     ''' copied from gemini'''
     data_bytes = data.encode('utf-8')
     key_bytes = key.encode('utf-8')
@@ -28,7 +28,7 @@ def xor_cipher(data,key):
 
 
 def xor_decipher(encrypted_data, key):
-  """Dencrypts or decrypts a string using XOR cipher."""
+  """Decrypts  string using XOR cipher."""
   return xor_cipher(encrypted_data,key)
 
 
@@ -407,4 +407,3 @@ def DigitalLockerSystem():
 
 
 DigitalLockerSystem()
-
