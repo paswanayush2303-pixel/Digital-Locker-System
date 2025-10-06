@@ -65,7 +65,7 @@ def save_data(data):
 # --- Core Locker Functions ---
 
 def register_user(data):
-    """ Register the user with a new ID and PIN."""
+    """ Register the user with a new user ID and PIN."""
     print("--- Registration ---")
     
     # --- Create Unique ID ---
@@ -99,7 +99,7 @@ def register_user(data):
 
 
 def login_user(data):
-    """  Login portal for the user with a  ID and PIN
+    """  Login portal for the user with a user ID and PIN
     Returns (True, user_id) if the PIN is correct, otherwise (False, None)."""
     
     user = None
@@ -408,3 +408,4 @@ def DigitalLockerSystem():
 
 
 DigitalLockerSystem()
+
