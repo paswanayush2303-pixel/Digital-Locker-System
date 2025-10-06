@@ -29,7 +29,7 @@ def xor_cipher(data,key):
 
 def xor_decipher(encrypted_data, key):
   """Dencrypts or decrypts a string using XOR cipher."""
-  return xor_cipher(encryted_data,key)
+  return xor_cipher(encrypted_data,key)
 
 
 def hash_pin(pin):
@@ -227,18 +227,15 @@ def check_and_clean_items(data, user):
         items_list = data[user]['items'][category]
         new_items_list = []
         
-        for i,item in enumerate (items_list):
-            try:
-             if item[i]['expiry'] != 0 and item['expiry'] < current_time:
+        for item in items_list:
+            
+             if item ['expiry'] != 0 and item['expiry'] < current_time:
                 print(f"Item in '{category}' has expired and was automatically deleted.")
                 items_to_clean = True
              else:
                 new_items_list.append(item)
-            except TypeError:
-                continue     
-            except KeyError:
-                continue    
-        data[user]['items'][category] = new_items_list
+
+    data[user]['items'][category] = new_items_list
         
     if items_to_clean:
         save_data(data)
@@ -248,14 +245,16 @@ def check_and_clean_items(data, user):
 
 def view_items(data, user):
     """Displays all stored, non-expired items for the user."""
-    
+    c=0
     # 1. Check and remove expired items
     data = check_and_clean_items(data, user)
     user_items = data[user]['items']
     
-    has_items = any(len(items) > 0 for items in user_items.values())
-
-    if not has_items:
+    for items in user_items.values():
+      if not items :
+       c=c+1 
+        
+    if c==4:    
         print("Your locker is empty.")
         return
     
@@ -408,3 +407,4 @@ def DigitalLockerSystem():
 
 
 DigitalLockerSystem()
+
