@@ -9,7 +9,6 @@ XOR_KEY = "SafestLockerDataKey1234567890"
 
 def xor_cipher(data,key):
     """Encrypts  string using XOR cipher."""
-    ''' copied from gemini'''
     data_bytes = data.encode('utf-8')
     key_bytes = key.encode('utf-8')
     
@@ -39,7 +38,7 @@ def hash_pin(pin):
     return h.hexdigest() 
 
 def check_pin(user_id, pin, data):
-    """Verifies a user's PIN against the stored hash."""
+    """Verifies a user's PIN ."""
     if user_id not in data:
         return False
     return hash_pin(pin) == data[user_id]['pin']
@@ -66,7 +65,7 @@ def save_data(data):
 # --- Core Locker Functions ---
 
 def register_user(data):
-    """ Prompts the user to register with a new ID and PIN."""
+    """ Register the user with a new ID and PIN."""
     print("--- Registration ---")
     
     # --- Create Unique ID ---
@@ -100,11 +99,12 @@ def register_user(data):
 
 
 def login_user(data):
-    """ Prompts the user for their ID and PIN to log in.
+    """  Login portal for the user with a  ID and PIN
     Returns (True, user_id) if the PIN is correct, otherwise (False, None)."""
     
     user = None
     while True:
+        #using .strip() so space do not cause any error'''
         user_input = input('Enter your Unique Locker ID: ').strip()
         if user_input in data:
             user = user_input
@@ -132,7 +132,7 @@ def login_user(data):
 
 
 def verify_pin(user, data):
-    """Prompts for PIN verification for sensitive actions."""
+    """PIN verification for sensitive actions."""
     print("--- Security Verification ---")
     pin =input("Enter your 4-digit PIN to confirm action: ").strip()
     if check_pin(user, pin, data):
@@ -144,7 +144,7 @@ def verify_pin(user, data):
 
 
 def add_item(data, user):
-    """Allows the user to add a new item, encrypting and optionally setting an expiry."""
+    """Allows the user to add a new item and optionally setting an expiry."""
     
     # 1. PIN Verification
     if not verify_pin(user, data):
@@ -221,6 +221,7 @@ def add_item(data, user):
 def check_and_clean_items(data, user):
     """Checks for expired items and removes them before viewing/removing."""
     items_to_clean = False
+    #time.time function return time in seconds fron epoch
     current_time = int(time.time())
     
     for category in ITEM_CATEGORIES:
@@ -240,7 +241,7 @@ def check_and_clean_items(data, user):
     if items_to_clean:
         save_data(data)
         
-    return data # Return the potentially updated data structure
+    return data # Return the updated data
 
 
 def view_items(data, user):
@@ -339,7 +340,7 @@ def remove_item(data, user):
     index_to_remove = None
     while True:
         try:
-            index_to_remove_input = input("Enter the number of the item to remove: ").strip()
+            index_to_remove_input = input("Choose an option: ").strip()
             if not index_to_remove_input: continue
             
             index_to_remove = int(index_to_remove_input) - 1
@@ -407,4 +408,3 @@ def DigitalLockerSystem():
 
 
 DigitalLockerSystem()
-
